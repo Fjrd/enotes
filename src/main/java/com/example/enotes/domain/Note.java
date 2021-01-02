@@ -10,15 +10,21 @@ import javax.persistence.Id;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 public class Note {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
-    public long id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private long id;
+
+    public Note(String message, String tag) {
+        this.message = message;
+        this.tag = tag;
+    }
+
     private String message;
+
     private String tag;
 
 
