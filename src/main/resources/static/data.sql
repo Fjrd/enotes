@@ -1,3 +1,3 @@
 INSERT INTO NOTE(ID, MESSAGE, TAG) VALUES
-    (1, 'MESSAGE1', 'TAG1'),
-    (2, 'message2', 'SECOND TAG' );
+    (1, 'mess1', 'tag1'),
+    (2, 'mess2', 'tag2');

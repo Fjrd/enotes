@@ -1,9 +1,6 @@
 package com.example.enotes.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,11 +12,12 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class Note {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    public Long id;
+    public long id;
     private String message;
     private String tag;
 

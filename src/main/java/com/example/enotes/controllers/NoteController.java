@@ -1,32 +1,35 @@
 package com.example.enotes.controllers;
 
-import com.example.enotes.domain.Note;
-import com.example.enotes.repositories.NoteRepository;
+import com.example.enotes.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.Map;
+
 
 @Controller
-@RequestMapping(value = "/note", method = RequestMethod.GET)
+@RequestMapping(value = "/notes", method = RequestMethod.GET)
 public class NoteController {
 
-    NoteRepository noteRepository;
+    NoteService noteService;
 
     @Autowired
-    public NoteController(NoteRepository noteRepository) {
-        this.noteRepository = noteRepository;
+    public NoteController(NoteService noteService) {
+        this.noteService = noteService;
     }
 
-    @GetMapping()
-    public String getNote(Model model){
-        Optional<Note> optionalNote = noteRepository.findById(1L);
-        Note note = optionalNote.get();
-        model.addAttribute("note", note);
-        return "note";
+    @GetMapping("/{id}")
+    public String getNoteById(@PathVariable Long id, Model model){
+        model.addAttribute("note", noteService.findById(id));
+        return "getNoteById";
     }
+
+    @GetMapping("/")
+    public String getAllNotes(Map<String, Object> model){
+        model.put("notes", noteService.findAll());
+        return "getAllNotes";
+    }
+
 }
