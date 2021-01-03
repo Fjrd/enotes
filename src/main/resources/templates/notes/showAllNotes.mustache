@@ -1,0 +1,38 @@
+<head>
+    <style>
+        table, th, td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<div>
+    <a href="/notes/new">Add new note</a>
+    <br>
+</div>
+
+<div>
+    <table style="width: 400px">
+        <thead>
+            <tr style="">
+                <td>Id</td>
+                <td>Message</td>
+                <td>Tag</td>
+                <td>Action</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#notes}}
+                <tr>
+                    <td><a href="/notes/{{id}}">{{id}}</a></td>
+                    <td>{{message}}</td>
+                    <td>{{tag}}</td>
+                    <td><a href="/notes/{{id}}/edit">Edit</a></td>
+                    <td><a href="/notes/{{id}}/delete">Delete</a></td>
+                </tr>
+            {{/notes}}
+        </tbody>
+    </table>
+</div>
