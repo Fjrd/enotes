@@ -5,10 +5,7 @@ import com.example.enotes.service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -22,10 +19,12 @@ public class NotesController {
         this.notesService = notesService;
     }
 
+
+
     @GetMapping()
     public String getAllNotes(Model model){
         model.addAttribute("notes", notesService.findAll());
-        return "notes/showAllNotes";
+        return "notes/NotesList";
     }
 
     @PostMapping()
@@ -40,13 +39,13 @@ public class NotesController {
     @GetMapping("/{id}")
     public String getNoteById(@PathVariable Long id, Model model){
         model.addAttribute("note", notesService.findById(id));
-        return "notes/showNoteById";
+        return "notes/NoteById";
     }
 
 
     @GetMapping("/new")
     public String addNewNoteForm(){
-        return "notes/showAddNewNote";
+        return "AddNewNote";
     }
 
     //@GetMapping("/{id}/edit")
@@ -63,7 +62,7 @@ public class NotesController {
     public String editNote(@PathVariable Long id,
                            @ModelAttribute Note note){
         note = notesService.findById(id);
-        return "notes/showEditNote";
+        return "notes/EditNoteForm";
     }
 
     @PostMapping("/{id}/edit")
