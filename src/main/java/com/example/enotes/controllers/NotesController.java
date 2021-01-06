@@ -48,8 +48,8 @@ public class NotesController {
 
     //@GetMapping("/{id}/edit")
 
-    //TODO POST
-    @GetMapping("/{id}/delete")
+    //TODO DELETE method
+    @PostMapping("/{id}/delete")
     public String deleteById(@PathVariable Long id){
         notesService.deleteById(id);
         return "redirect:/notes";
@@ -63,10 +63,10 @@ public class NotesController {
         return "notes/EditNoteForm";
     }
 
+    //TODO patch method
     @PostMapping("/{id}/edit")
     public String editNotePatch(@ModelAttribute Note note,
                                 @ModelAttribute String method){
-        //if (method.equals("patch"))
         notesService.save(note);
         return "redirect:/notes";
     }

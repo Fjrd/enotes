@@ -7,11 +7,15 @@
     </style>
 </head>
 
-<div>
+<!--<div>
     <a href="/notes/new">Add new note</a>
     <br>
     <br>
-</div>
+</div>-->
+
+<form action="/notes/new" method="get">
+    <button type="submit" >Add new note</button>
+</form></td>
 
 <div>
     <table style="width: 400px">
@@ -30,8 +34,16 @@
                     <td><a href="/notes/{{id}}">{{id}}</a></td>
                     <td>{{message}}</td>
                     <td>{{tag}}</td>
-                    <td><a href="/notes/{{id}}/edit">Edit</a></td>
-                    <td><a href="/notes/{{id}}/delete">Delete</a></td>
+                    <td>
+                        <form action="/notes/{{id}}/edit"method="get">
+                            <button type="submit" >Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/notes/{{id}}/delete" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             {{/notes}}
         </tbody>
