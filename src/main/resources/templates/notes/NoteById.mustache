@@ -1,8 +1,10 @@
 <table>
     <tr>
-        {{note.id}}
-        {{note.message}}
-        {{note.tag}}
+        {{#note}}
+            {{id}}
+            {{message}}
+            {{tag}}
+        {{/note}}
     </tr>
 </table>
 

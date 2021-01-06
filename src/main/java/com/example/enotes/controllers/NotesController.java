@@ -19,8 +19,6 @@ public class NotesController {
         this.notesService = notesService;
     }
 
-
-
     @GetMapping()
     public String getAllNotes(Model model){
         model.addAttribute("notes", notesService.findAll());
@@ -35,9 +33,9 @@ public class NotesController {
         return "redirect:/notes";
     }
 
-
     @GetMapping("/{id}")
-    public String getNoteById(@PathVariable Long id, Model model){
+    public String getNoteById(@PathVariable Long id,
+                              Model model){
         model.addAttribute("note", notesService.findById(id));
         return "notes/NoteById";
     }
@@ -45,11 +43,10 @@ public class NotesController {
 
     @GetMapping("/new")
     public String addNewNoteForm(){
-        return "AddNewNote";
+        return "notes/AddNewNoteForm";
     }
 
     //@GetMapping("/{id}/edit")
-
 
     //TODO POST
     @GetMapping("/{id}/delete")
@@ -60,18 +57,17 @@ public class NotesController {
 
     @GetMapping("/{id}/edit")
     public String editNote(@PathVariable Long id,
-                           @ModelAttribute Note note){
-        note = notesService.findById(id);
+                           Model model){
+        Note note = notesService.findById(id);
+        model.addAttribute("note", note);
         return "notes/EditNoteForm";
     }
 
     @PostMapping("/{id}/edit")
     public String editNotePatch(@ModelAttribute Note note,
-                                @ModelAttribute String method,
-                                @ModelAttribute Long id){
-        System.out.println(note.toString());
-        if (method.equals("patch"))
-            notesService.save(note);
+                                @ModelAttribute String method){
+        //if (method.equals("patch"))
+        notesService.save(note);
         return "redirect:/notes";
     }
 
