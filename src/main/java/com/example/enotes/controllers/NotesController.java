@@ -5,7 +5,10 @@ import com.example.enotes.service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -26,10 +29,11 @@ public class NotesController {
     }
 
     @PostMapping()
-    public String addNewNote(@RequestParam String text,
-                             @RequestParam String tag){
-
-        notesService.save(new Note(text, tag));
+    public String addNewNote(@ModelAttribute("note") @Valid Note note,
+                             BindingResult bindingResult){
+        if (bindingResult.hasErrors())
+            return "notes/AddNewNoteForm";
+        notesService.save(note);
         return "redirect:/notes";
     }
 
@@ -46,8 +50,6 @@ public class NotesController {
         return "notes/AddNewNoteForm";
     }
 
-    //@GetMapping("/{id}/edit")
-
     //TODO DELETE method
     @PostMapping("/{id}/delete")
     public String deleteById(@PathVariable Long id){
@@ -56,8 +58,8 @@ public class NotesController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editNote(@PathVariable Long id,
-                           Model model){
+    public String editNoteForm(@PathVariable Long id,
+                               Model model){
         Note note = notesService.findById(id);
         model.addAttribute("note", note);
         return "notes/EditNoteForm";
@@ -65,8 +67,12 @@ public class NotesController {
 
     //TODO patch method
     @PostMapping("/{id}/edit")
-    public String editNotePatch(@ModelAttribute Note note,
-                                @ModelAttribute String method){
+    public String editNotePatch(@ModelAttribute ("note") @Valid Note note,
+                                BindingResult bindingResult,
+                                @ModelAttribute ("id") Long id){
+        if (bindingResult.hasErrors()) {
+            return "notes/EditNoteForm";
+        }
         notesService.save(note);
         return "redirect:/notes";
     }

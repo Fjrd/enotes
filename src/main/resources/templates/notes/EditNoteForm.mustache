@@ -1,11 +1,8 @@
 <form action="/notes/{{id}}/edit" method="post">
-
     Edit Note
     <br>
-    {{#note}}
         <input type="hidden" name="_method" value="patch">
-        <input type="text" name="message" placeholder="Input text" value="{{message}}"><br>
-        <input type="text" name="tag" placeholder="Tag" value="{{tag}}"><br>
+        <input type="text" name="message" placeholder="Input text" value="{{note.message}}"><br>
+        <input type="text" name="tag" placeholder="Tag" value="{{note.tag}}"><br>
         <button  type="submit">Confirm changes</button>
-    {{/note}}
 </form>
