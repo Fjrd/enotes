@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NotesRepository extends CrudRepository<Note, Long> {
+
+    public Note findByMessage(String message);
+
 }

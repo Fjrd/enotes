@@ -76,8 +76,4 @@ public class NotesController {
         notesService.save(note);
         return "redirect:/notes";
     }
-
-
-
-
 }
